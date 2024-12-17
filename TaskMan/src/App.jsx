@@ -63,7 +63,9 @@ function App() {
 
   return (
     <div className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-center mb-8">Task Management System</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">
+        Task Management System
+      </h1>
 
       {/* Add Task Section */}
       <div className="mb-6 bg-white shadow-md rounded-lg p-6">
@@ -105,16 +107,18 @@ function App() {
         >
           Allocate Task
         </button>
-        <ul className="mt-4 space-y-2">
-          {tasks.map((task, index) => (
-            <li
-              key={index}
-              className="border rounded-lg p-2 bg-gray-100 text-gray-800"
-            >
-              Task: {task.task}, Assigned To: {task.assigned_to}
-            </li>
-          ))}
-        </ul>
+        <div className="mt-4 max-h-48 overflow-y-auto">
+          <ul className="space-y-2">
+            {tasks.map((task, index) => (
+              <li
+                key={index}
+                className="border rounded-lg p-2 bg-gray-100 text-gray-800"
+              >
+                Task: {task.task}, Assigned To: {task.assigned_to}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       {/* Manage Employees Section */}
