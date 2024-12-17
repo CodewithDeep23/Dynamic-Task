@@ -26,24 +26,6 @@ def add_task():
     task_id = tasks_collection.insert_one(task).inserted_id
     return jsonify({"message": "Task added successfully!", "task_id": str(task_id)})
 
-# Allocate a task
-# @app.route('/allocate_task', methods=['GET'])
-# def allocate_task():
-#     # task = tasks_collection.find_one(sort=[("priority", 1)])
-#     task = tasks_collection.find_one({"status": {"$in": ["Pending", "In Progress"]}}, sort=[("priority", 1)])
-#     if task:
-#         assigned_employee = assign_employee(task['skill'])
-#         if assigned_employee != "No suitable employee found":
-#             tasks_collection.update_one(
-#                 {"_id": task["_id"]},
-#                 {"$set": {"assigned_to": assigned_employee, "status": "Allocated"}}
-#             )
-#             return jsonify({
-#                 "task": task['task_name'],
-#                 "assigned_to": assigned_employee
-#             })
-#         return jsonify({"message": "No suitable employee found!"})
-#     return jsonify({"message": "No tasks available!"})
 @app.route('/allocate_task', methods=['GET'])
 def allocate_task():
     task = tasks_collection.find_one({"status": {"$in": ["Pending", "In Progress"]}}, sort=[("priority", 1)])
