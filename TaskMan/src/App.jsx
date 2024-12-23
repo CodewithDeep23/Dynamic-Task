@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function App() {
   const [taskName, setTaskName] = useState("");
-  const [priority, setPriority] = useState(0);
+  const [priority, setPriority] = useState("");
   const [skill, setSkill] = useState("");
   const [tasks, setTasks] = useState([]);
   const [employeeName, setEmployeeName] = useState("");
@@ -18,6 +18,10 @@ function App() {
     });
     const data = await response.json();
     alert(data.message);
+
+    setTaskName('')
+    setPriority('')
+    setSkill('')
   };
 
   const allocateTask = async () => {
@@ -62,8 +66,13 @@ function App() {
   };
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-center mb-8">
+    <div
+      className="p-8 bg-gray-50 min-h-screen bg-cover bg-no-repeat"
+      style={{
+        backgroundImage: `url('https://media.istockphoto.com/id/1392918374/photo/lots-of-fluorescent-lights-on-ceiling-architecture-details.jpg?s=1024x1024&w=is&k=20&c=l1WkDvYRWAaqXEZRz9Soc3A1xL5gXwJJlzUCa2XqAOs=')`,
+      }}
+    >
+      <h1 className="text-3xl font-bold text-center mb-8 text-white">
         Task Management System
       </h1>
 
@@ -75,18 +84,21 @@ function App() {
             type="text"
             placeholder="Task Name"
             className="border rounded-lg p-2"
+            value={taskName}
             onChange={(e) => setTaskName(e.target.value)}
           />
           <input
             type="number"
             placeholder="Priority"
             className="border rounded-lg p-2"
+            value={priority}
             onChange={(e) => setPriority(e.target.value)}
           />
           <input
             type="text"
             placeholder="Skill"
             className="border rounded-lg p-2"
+            value={skill}
             onChange={(e) => setSkill(e.target.value)}
           />
           <button
