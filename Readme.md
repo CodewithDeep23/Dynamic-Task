@@ -6,14 +6,11 @@ The **Dynamic Task Scheduling and Allocation System** is a web-based application
 ## **Features**
 - **Task Management**: Add tasks with details like name, priority, and required skills.
 - **Task Allocation**: Automatically allocate tasks to employees based on their skills.
-- **Real-Time Updates**: Track task allocations in real-time using WebSockets.
-- **Secure Authentication**: Role-based authentication with JWT (JSON Web Tokens) for user login.
 
 ## **Technologies Used**
-- **Frontend**: React.js, HTML, CSS, JavaScript, Bootstrap
-- **Backend**: Flask (Python), RESTful APIs, JWT Authentication
+- **Frontend**: React.js, HTML, CSS, JavaScript, tailwind
+- **Backend**: Flask (Python)
 - **Database**: MongoDB
-- **Real-Time Communication**: WebSockets
 
 ## **Project Setup**
 
