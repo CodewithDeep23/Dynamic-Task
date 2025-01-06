@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router'
+import { useAuth } from "./store";
 
 function App() {
   const [taskName, setTaskName] = useState("");
@@ -9,31 +11,46 @@ function App() {
   const [employeeSkills, setEmployeeSkills] = useState("");
   const [employeeTasks, setEmployeeTasks] = useState([]);
   const [status, setStatus] = useState("");
+  const navigate = useNavigate();
+  const { token } = useAuth();
 
   const addTask = async () => {
     const response = await fetch("http://127.0.0.1:5000/add_task", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({ task_name: taskName, priority, skill }),
     });
     const data = await response.json();
     alert(data.message);
 
-    setTaskName('')
-    setPriority('')
-    setSkill('')
+    setTaskName("");
+    setPriority("");
+    setSkill("");
   };
 
   const allocateTask = async () => {
-    const response = await fetch("http://127.0.0.1:5000/allocate_task");
+    const token = localStorage.getItem("token");
+    const response = await fetch("http://127.0.0.1:5000/allocate_task", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     setTasks([...tasks, data]);
   };
 
   const manageEmployee = async () => {
+    const token = localStorage.getItem("token");
     const response = await fetch("http://127.0.0.1:5000/manage_employee", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
       body: JSON.stringify({
         name: employeeName,
         skills: employeeSkills.split(","),
@@ -64,6 +81,12 @@ function App() {
     alert(data.message);
     fetchEmployeeTasks();
   };
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+    }
+  }, [token, navigate]);
 
   return (
     <div
